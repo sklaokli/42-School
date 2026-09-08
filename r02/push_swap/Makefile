@@ -3,80 +3,111 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sklaokli <sklaoklitudent.42.fr>          +#+  +:+       +#+         #
+#    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/18 19:44:55 by sklaokli          #+#    #+#              #
-#    Updated: 2024/12/17 16:22:41 by sklaokli         ###   ########.fr        #
+#    Created: 2025/05/08 12:50:47 by sklaokli          #+#    #+#              #
+#    Updated: 2025/05/08 13:04:35 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## Libraries
-NAME	=	push_swap
-LIBFT	=	libft/libft.a
+NAME		=	push_swap
+CHECKER		=	checker
+GNL			=	$(GNL_DIR)/get_next_line
+GCT			=	$(GCT_DIR)/gct.a
 
-## Paths to files
-SRC_DIR	=	sources
-INC_DIR	=	includes
+## Paths
+SRC_DIR		:=	sources
+OBJ_DIR		:=	objects
+INC_DIR		:=	include
+LIB_DIR		:=	lib
+GNL_DIR		:=	$(LIB_DIR)/get_next_line
+GCT_DIR		:=	$(LIB_DIR)/gct
 
-## Source files
-SRC		=	$(SRC_DIR)/main/main.c $(SRC_DIR)/main/init.c \
-			$(SRC_DIR)/main/push_swap.c \
-			\
-			$(SRC_DIR)/operation/operation.c $(SRC_DIR)/operation/push.c \
-			$(SRC_DIR)/operation/swap.c $(SRC_DIR)/operation/rotate.c \
-			$(SRC_DIR)/operation/reverse_rotate.c \
-			\
-			$(SRC_DIR)/program/parser.c $(SRC_DIR)/program/clear.c \
-			\
-			$(SRC_DIR)/sort/tiny_sort.c $(SRC_DIR)/sort/chunk_sort.c \
-			\
-			$(SRC_DIR)/utils/stack.c $(SRC_DIR)/utils/debug.c \
-			$(SRC_DIR)/utils/sort_utils.c
+## Subdirectories
+SUBDIRS			:=	mandatory bonus utils
+mandatory_FILES :=	main.c
+bonus_FILES     :=	checker.c
+utils_FILES     :=	init.c ft_split.c list.c action.c \
+					tiny.c butterfly.c sort.c utils.c
 
-HEADER	=	$(INC_DIR)/push_swap.h
+## All sources and objects
+SRC_FILES	:=	$(foreach dir,$(SUBDIRS), \
+				$(addprefix $(SRC_DIR)/$(dir)/,$($(dir)_FILES)))
 
-## Convert *.c files tnto *.o files
-OBJ		=	$(SRC:%.c=%.o)
+OBJ_FILES	:=	$(foreach dir,$(SUBDIRS), \
+				$(addprefix $(OBJ_DIR)/$(dir)/,$($(dir)_FILES:.c=.o)))
+
+## Optional named groups
+SRC_MANDA	:=	$(addprefix $(SRC_DIR)/mandatory/,$(mandatory_FILES))
+SRC_BONUS	:=	$(addprefix $(SRC_DIR)/bonus/,$(bonus_FILES))
+SRC_UTILS	:=	$(addprefix $(SRC_DIR)/utils/,$(utils_FILES))
+
+OBJ_MANDA	:=	$(addprefix $(OBJ_DIR)/mandatory/,$(mandatory_FILES:.c=.o))
+OBJ_BONUS	:=	$(addprefix $(OBJ_DIR)/bonus/,$(bonus_FILES:.c=.o))
+OBJ_UTILS	:=	$(addprefix $(OBJ_DIR)/utils/,$(utils_FILES:.c=.o))
+
+## Include
+INC			:=	-I$(INC_DIR) -I$(GNL_DIR)/include -I$(GCT_DIR)/include
+
+## Counters for progress
+COMPILED	:=	0
+TOTAL_FILES	:=	$(words $(OBJ_UTILS) $(OBJ_MANDA))
 
 ## Commands
-RM		=	rm -f
-CC		=	cc
-LIBC	=	ar rcs
-FLAGS	=	-Wall -Wextra -Werror
+RM			:=	rm -f
+CC			:=	cc
+FLAGS		:=	-Wall -Wextra -Werror
 
-## Color Codes
-CYAN	=	\033[0;36m
-GREEN	=	\033[0;32m
-RED		=	\033[0;31m
-BLUE	=	\033[0;34m
-YELLOW	=	\033[0;33m
-RESET	=	\033[0m
+## Colors
+CYAN		:=	\033[0;36m
+GREEN		:=	\033[0;32m
+RED			:=	\033[0;31m
+BLUE		:=	\033[0;34m
+YELLOW		:=	\033[0;33m
+RESET		:=	\033[0m
+
+## Compilation rule
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@ mkdir -p $(dir $@)
+	@ $(eval COMPILED=$(shell echo $$(($(COMPILED)+1))))
+	@ PERCENT=$$(($(COMPILED)*100/$(TOTAL_FILES))); \
+	echo "$(BLUE)[$(COMPILED)/$(TOTAL_FILES)] Compiling $< ($$PERCENT%)$(RESET)\r"; \
+	$(CC) $(FLAGS) $(INC) -c $< -o $@
 
 ## Targets
-%.o:		%.c
-			@ $(CC) $(FLAGS) -I $(INC_DIR) -I libft/includes -c $< -o $@
+all: $(NAME)
 
-all:		$(LIBFT) $(NAME)
-			@ echo "$(GREEN)Done! push_swap is now ready.$(RESET)"
+$(NAME): Makefile $(OBJ_UTILS) $(OBJ_MANDA)
+	@ $(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_MANDA) $(INC) -o $(NAME)
+	@ echo "$(GREEN)[OK] $(NAME) built succesfully.$(RESET)"
 
-$(NAME):	$(OBJ)
-			@ echo "$(BLUE)Building push_swap...$(RESET)"
-			@ $(CC) $(FLAGS) $(OBJ) -Llibft -lft -o $(NAME)
+bonus: Makefile lib $(OBJ_UTILS) $(OBJ_BONUS)
+	@ $(CC) $(FLAGS) $(OBJ_UTILS) $(OBJ_BONUS) $(GNL) $(INC) -o $(CHECKER)
+	@ echo "$(GREEN)[OK] $(CHECKER) built succesfully.$(RESET)"
 
-$(LIBFT):
-			@ echo "$(BLUE)Building libft...$(RESET)"
-			@ $(MAKE) -sC libft
+lib: Makefile
+	@ $(MAKE) -sC $(GNL_DIR)
+	@ $(MAKE) -sC $(GCT_DIR)
+
+lib_clean:
+	@ $(MAKE) -sC $(GNL_DIR) clean
+	@ $(MAKE) -sC $(GCT_DIR) clean
+
+lib_fclean:
+	@ $(MAKE) -sC $(GNL_DIR) fclean
+	@ $(MAKE) -sC $(GCT_DIR) fclean
 
 clean:
-			@ $(RM) $(OBJ)
-			@ $(MAKE) -sC libft clean
-			@ echo "$(CYAN)All push_swap object files have been cleaned.$(RESET)"
+	@ $(MAKE) -sC $(GNL_DIR) clean
+	@ $(RM) -rf $(OBJ_DIR)
+	@ echo "$(CYAN)All $(NAME) object files have been cleaned.$(RESET)"
 
-fclean:		clean
-			@ $(RM) $(NAME)
-			@ $(MAKE) -sC libft fclean
-			@ echo "$(CYAN)All push_swap executable files have been cleaned.$(RESET)"
+fclean: clean
+	@ $(MAKE) -sC $(GNL_DIR) fclean
+	@ $(RM) -f $(NAME) $(CHECKER)
+	@ echo "$(CYAN)All $(NAME) executable files have been cleaned.$(RESET)"
 
-re:			fclean all
+re: fclean all
 
-.PHONY:		all clean fclean re
+.PHONY: all bonus clean fclean re lib
