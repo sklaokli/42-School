@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gct.h                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 23:29:08 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/05/08 11:41:48 by sklaokli         ###   ########.fr       */
+/*   Created: 2026/01/22 15:36:11 by sklaokli          #+#    #+#             */
+/*   Updated: 2026/04/17 22:46:48 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GCT_H
-# define GCT_H
+#include "push_swap.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-
-typedef struct s_gct
+int	main(int argc, char **argv)
 {
-	struct s_gct	*next;
-	void			*ptr;
-}	t_gct;
+	int		*tab;
+	size_t	size;
 
-void	*gct_malloc(size_t size);
-void	gct_cleanup(void);
-
-#endif
+	if (argc < 2)
+		return (EXIT_FAILURE);
+	tab = args_to_tab(argc, argv, &size);
+	if (!tab)
+	{
+		write(2, "Error\n", 6);
+		return (EXIT_FAILURE);
+	}
+	if (!push_swap(tab, size))
+	{
+		write(2, "Error\n", 6);
+		free(tab);
+		return (EXIT_FAILURE);
+	}
+	free(tab);
+	return (EXIT_SUCCESS);
+}
