@@ -264,4 +264,4 @@ Every project in this repository satisfies the stringent requirements of 42 Scho
 
 - **Sorawit Klaokliang** (`sklaokli`)
 - Student at **42 Bangkok**
-- GitHub: [@bababxxm](https://github.com/bababxxm)
+- GitHub: [@sklaokli](https://github.com/sklaokli)
