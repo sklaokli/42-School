@@ -76,3 +76,5 @@ Always develop new features, bug fixes, or tests in a dedicated branch:
 - **refactor**: Code change that neither fixes a bug nor adds a feature (`refactor(norm): split function to satisfy 25-line limit`)
 - **docs**: Documentation only (`docs: update project roadmap`)
 - **ci**: GitHub Actions or CI updates (`ci: exclude test suites from Norminette`)
+
+For detailed Git branching rules, human-in-the-loop commit boundaries, and PR auto-fill instructions, see the [Git & PR Workflow Guide](workflowGuide.md).

@@ -24,9 +24,9 @@
 
 # Specific project compiled binaries
 r02/so_long/so_long
-r02/push_swap/**/push_swap
-r02/push_swap/**/checker
-r02/push_swap/**/checker_linux
+r02/push_swap/push_swap
+r02/push_swap/checker
+r02/push_swap/checker_linux
 r02/minitalk/client
 r02/minitalk/server
 r03/minishell/minishell
@@ -44,6 +44,7 @@ r05/webserv/webserv
 traces.txt
 imgui.ini
 *.valgrind*
+PR_INFO.md
 
 # Editor & OS files
 .vscode/
