@@ -1,8 +1,0 @@
-blank_issues_enabled: true
-contact_links:
-  - name: 42 Bangkok Intranet
-    url: https://intra.42bangkok.com
-    about: Official 42 Intra portal for peer evaluations and project submissions
-  - name: 42 Monorepo Documentation
-    url: https://github.com/sklaokli/42-School/tree/main/docs
-    about: Monorepo architectural guidelines, Norminette rules, and testing standards
