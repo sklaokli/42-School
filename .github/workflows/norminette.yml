@@ -59,16 +59,23 @@ jobs:
           fi
 
           echo "Using diff target: $DIFF_TARGET"
-          FILES=$(git diff --name-only $DIFF_TARGET | grep -E '\.(c|h)$' | grep -v -E '(^|/)tests?/' || true)
+          FILES=$(git diff --diff-filter=d --name-only $DIFF_TARGET | grep -E '\.(c|h)$' | grep -v -E '(^|/)tests?/' || true)
 
-          if [ -z "$FILES" ]; then
+          EXISTING_FILES=""
+          for f in $FILES; do
+            if [ -f "$f" ]; then
+              EXISTING_FILES="$EXISTING_FILES $f"
+            fi
+          done
+
+          if [ -z "$EXISTING_FILES" ]; then
             echo "No project C/header files modified (or only test files changed). Skipping."
             exit 0
           fi
 
           echo "Checking source files:"
-          echo "$FILES"
-          norminette $FILES
+          echo "$EXISTING_FILES"
+          norminette $EXISTING_FILES
 
       - name: Run Norminette on Specific Directory
         if: "${{ github.event.inputs.target_dir != '' }}"
