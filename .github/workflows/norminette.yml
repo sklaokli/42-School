@@ -34,7 +34,7 @@ concurrency:
 
 jobs:
   norminette:
-    name: Check Norm Compliance
+    name: Run Norminette
     runs-on: ubuntu-latest
 
     steps:
@@ -53,10 +53,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install norminette
 
-      - name: Verify Norminette Version
+      - name: Check Norminette Version
         run: norminette -v
 
-      - name: Run Norminette on Changed Files
+      - name: Check Changed Files
         if: "${{ github.event.inputs.target_dir == '' }}"
         run: |
           echo "Detecting modified C and header files (excluding test suites)..."
@@ -87,7 +87,7 @@ jobs:
           echo "$EXISTING_FILES"
           norminette $EXISTING_FILES
 
-      - name: Run Norminette on Specific Directory
+      - name: Check Target Directory
         if: "${{ github.event.inputs.target_dir != '' }}"
         run: |
           echo "Running norminette on: ${{ github.event.inputs.target_dir }} (excluding tests/ and vendor libraries)"

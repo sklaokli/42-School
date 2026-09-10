@@ -31,7 +31,7 @@ concurrency:
 
 jobs:
   run-tests:
-    name: Run Automated Tests
+    name: Test Projects
     runs-on: ubuntu-latest
 
     steps:
@@ -50,7 +50,7 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq build-essential valgrind
 
-      - name: Selective Pipeline Testing (on Push / PR)
+      - name: Test Changed Projects
         if: "${{ github.event_name != 'workflow_dispatch' }}"
         run: |
           echo "Detecting modified projects for selective testing..."
@@ -87,7 +87,7 @@ jobs:
             echo "No test-enabled projects modified in this PR / commit. Skipping."
           fi
 
-      - name: Manual Project Testing (Workflow Dispatch)
+      - name: Test Selected Project
         if: "${{ github.event_name == 'workflow_dispatch' }}"
         run: |
           TARGET="${{ github.event.inputs.project }}"
