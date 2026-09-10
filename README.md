@@ -1,12 +1,12 @@
-# 🌟 42 School — Common Core Journey
-
 <div align="center">
+
+# 🌟 42 School — Common Core Journey
 
 ![42 School](https://img.shields.io/badge/42%20Bangkok-sklaokli-000000?style=for-the-badge&logo=42&logoColor=white)
 ![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
-![C++](https://img.shields.io/badge/C++98-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![C++](https://img.shields.io/badge/C%2B%2B98-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Shell](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
+![Shell](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnubash&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 
 <br/>
@@ -14,7 +14,7 @@
 [![Norminette](https://github.com/sklaokli/42-School/actions/workflows/norminette.yml/badge.svg)](https://github.com/sklaokli/42-School/actions/workflows/norminette.yml)
 [![Project Tester](https://github.com/sklaokli/42-School/actions/workflows/project-tester.yml/badge.svg)](https://github.com/sklaokli/42-School/actions/workflows/project-tester.yml)
 ![Memory Safety](https://img.shields.io/badge/Memory%20Safety-Valgrind%20%7C%20ASan-brightgreen?style=flat-square&logo=c)
-![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square&logo=git)
+![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow?style=flat-square&logo=git)
 ![Status](https://img.shields.io/badge/Common%20Core-In%20Progress-blue?style=flat-square)
 
 </div>
@@ -23,7 +23,7 @@
 
 ## 📖 About
 
-Welcome! I’m **sklaokli** ([@bababxxm](https://github.com/bababxxm)), a software engineering student at **42 Bangkok**.
+Welcome! I’m **sklaokli** ([@sklaokli](https://github.com/sklaokli)), a software engineering student at **42 Bangkok**.
 
 **42** is an innovative, tuition-free, peer-driven, and teacher-free coding school. The curriculum centers on deep algorithmic problem-solving, low-level systems programming, operating system primitives, computer graphics, and networking.
 
@@ -71,43 +71,43 @@ The 42 Common Core is structured as concentric circles (Ranks). Mastery of found
 ```mermaid
 flowchart LR
     subgraph Circle00 ["Rank 00: Fundamentals"]
-        libft["libft<br/><i>Custom C Lib & Lists</i>"]
+        libft["libft<br/>Custom C Lib & Lists"]
     end
 
     subgraph Circle01 ["Rank 01: I/O & SysAdmin"]
-        printf["ft_printf<br/><i>Variadic Functions</i>"]
-        gnl["get_next_line<br/><i>FD & Buffer I/O</i>"]
-        b2br["Born2beroot<br/><i>Linux VM & Security</i>"]
+        printf["ft_printf<br/>Variadic Functions"]
+        gnl["get_next_line<br/>FD & Buffer I/O"]
+        b2br["Born2beroot<br/>Linux VM & Security"]
     end
 
     subgraph Circle02 ["Rank 02: Unix & Graphics"]
-        push_swap["push_swap<br/><i>Sorting Algorithms</i>"]
-        so_long["so_long<br/><i>2D MLX42 Game</i>"]
-        minitalk["minitalk<br/><i>Signal-based IPC</i>"]
+        push_swap["push_swap<br/>Sorting Algorithms"]
+        so_long["so_long<br/>2D MLX42 Game"]
+        minitalk["minitalk<br/>Signal-based IPC"]
     end
 
     subgraph Circle03 ["Rank 03: Concurrency & Systems"]
-        minishell["minishell<br/><i>Custom Unix Shell</i>"]
-        philo["philosophers<br/><i>POSIX Threads & Mutexes</i>"]
+        minishell["minishell<br/>Custom Unix Shell"]
+        philo["philosophers<br/>POSIX Threads & Mutexes"]
     end
 
     subgraph Circle04 ["Rank 04: Math & OOP"]
-        cpp00_04["cpp00 – cpp04<br/><i>C++98 OOP Fundamentals</i>"]
-        miniRT["miniRT<br/><i>Raytracing Engine</i>"]
-        netpractice["NetPractice<br/><i>TCP/IP & Routing</i>"]
+        cpp00_04["cpp00 - cpp04<br/>C++98 OOP Fundamentals"]
+        miniRT["miniRT<br/>Raytracing Engine"]
+        netpractice["NetPractice<br/>TCP/IP & Routing"]
     end
 
     subgraph Circle05 ["Rank 05: Infrastructure & Web"]
-        cpp05_09["cpp05 – cpp09<br/><i>Advanced C++ & STL</i>"]
-        webserv["webserv<br/><i>Asynchronous HTTP/1.1</i>"]
-        inception["inception<br/><i>Docker Infrastructure</i>"]
+        cpp05_09["cpp05 - cpp09<br/>Advanced C++ & STL"]
+        webserv["webserv<br/>Asynchronous HTTP/1.1"]
+        inception["inception<br/>Docker Infrastructure"]
     end
 
     libft --> printf & gnl & b2br
-    printf & gnl --> push_swap & so_long & minitalk
+    printf & gnl & b2br --> push_swap & so_long & minitalk
     push_swap & minitalk & so_long --> minishell & philo
     minishell & philo --> cpp00_04 & miniRT & netpractice
-    cpp00_04 & miniRT --> cpp05_09 & webserv & inception
+    cpp00_04 & miniRT & netpractice --> cpp05_09 & webserv & inception
 ```
 
 ---
@@ -125,10 +125,10 @@ flowchart LR
 |             | [`so_long`](./r02/so_long)             | C (MLX42 Graphics)  | Window management, 2D tile rendering, event handling, flood-fill map validation                                    |
 | **Rank 03** | [`minishell`](./r03/minishell)         | C (Systems)         | Lexing, AST / command parsing, pipelines, redirections (`<`, `>`, `<<`, `>>`), signal trapping, built-ins          |
 |             | [`philosophers`](./r03/philosophers)   | C (POSIX Threads)   | Concurrent programming, POSIX mutexes, race conditions, deadlock prevention, Dining Philosophers                   |
-| **Rank 04** | [`cpp00` – `cpp04`](./r04/)            | C++98 (OOP)         | Canonical Form (orthodox), memory allocation (`new`/`delete`), inheritance, subtype polymorphism, abstract classes |
+| **Rank 04** | [`cpp00 - cpp04`](./r04/)              | C++98 (OOP)         | Canonical Form (orthodox), memory allocation (`new`/`delete`), inheritance, subtype polymorphism, abstract classes |
 |             | [`miniRT`](./r04/miniRT)               | C (Graphics & Math) | Vector algebra, ray-object intersection (spheres, planes, cylinders), Phong reflection model, shadows              |
 |             | [`NetPractice`](./r04/NetPractice)     | Networking          | IPv4 addressing, subnet masks (CIDR), routing tables, switch/router configurations                                 |
-| **Rank 05** | [`cpp05` – `cpp09`](./r05/)            | C++98 (Advanced)    | Exception handling, C++ casts (`static_cast`, `dynamic_cast`), templates, STL algorithms, Ford-Johnson sort        |
+| **Rank 05** | [`cpp05 - cpp09`](./r05/)              | C++98 (Advanced)    | Exception handling, C++ casts (`static_cast`, `dynamic_cast`), templates, STL algorithms, Ford-Johnson sort        |
 |             | [`inception`](./r05/inception)         | Docker, SysAdmin    | Multi-container microservices (NGINX, WordPress, MariaDB) with Docker Compose, TLSv1.3, persistent volumes         |
 |             | [`webserv`](./r05/webserv)             | C++98 (Networking)  | Non-blocking I/O multiplexing (`poll`/`epoll`/`kqueue`), RFC 7230 HTTP/1.1 parser, CGI execution engine            |
 
@@ -146,17 +146,17 @@ flowchart LR
 │   └── get_next_line/         # Reading lines from file descriptors
 ├── r02/
 │   ├── minitalk/              # Signal-based IPC client-server
-│   ├── push_swap/             # Stack sorting algorithm (trials & optimization)
+│   ├── push_swap/             # Stack sorting algorithm (Butterfly sort)
 │   └── so_long/               # 2D game using MLX42
 ├── r03/
 │   ├── minishell/             # Custom UNIX shell implementation
 │   └── philosophers/          # Multithreading concurrency simulation
 ├── r04/
-│   ├── cpp00/ – cpp04/        # C++ Object-Oriented Programming modules
+│   ├── cpp00/ ... cpp04/      # C++ Object-Oriented Programming modules
 │   ├── miniRT/                # Raytracer rendering 3D geometric shapes
 │   └── NetPractice/           # Network configuration exercises
 └── r05/
-    ├── cpp05/ – cpp09/        # Advanced C++ (Exceptions, Templates, STL)
+    ├── cpp05/ ... cpp09/      # Advanced C++ (Exceptions, Templates, STL)
     ├── inception/             # Docker Compose LEMP infrastructure
     └── webserv/               # Asynchronous HTTP/1.1 web server
 ```
@@ -171,22 +171,22 @@ This repository includes a custom, unified root [`Makefile`](./Makefile) equippe
 === 42-School Monorepo Management Console ===
 
 Monorepo Git Operations:
-  make push                   Push entire monorepo to GitHub
-  make pull                   Pull latest changes for monorepo
-  make status (or make st)    Show repository working status
-  make backup                 Create a timestamped backup of the .git directory
+  make push                     Push entire monorepo to GitHub
+  make pull                     Pull latest changes for monorepo
+  make status (or make st)      Show repository working status
+  make backup                   Create a timestamped backup of the .git directory
 
 Quality & 42 Intra Submission Tooling:
-  make setup-hooks            Install Git hooks (Norminette, commit-msg, artifact guards)
-  make submit PROJECT=<name>  Automated pre-flight checks, fclean, and subtree push to 42 Intra
+  make setup-hooks              Install Git hooks (Norminette, commit-msg, artifact guards)
+  make submit PROJECT=<name>    Automated pre-flight checks, fclean, and subtree push to 42 Intra
 
 Workspace Maintenance & Testing:
-  make test PROJECT=<name>    Run automated unit tests (e.g. make test PROJECT=libft)
-  make sanitize PROJECT=<name> Compile & run tests with AddressSanitizer & UBSan
-  make valgrind PROJECT=<name> Run Valgrind full leak check (zero-tolerance exit code)
-  make clean-all              Run clean in all subprojects
-  make fclean-all             Run fclean in all subprojects
-  make norm                   Run Norminette across all projects
+  make test PROJECT=<name>      Run automated unit tests (e.g. make test PROJECT=libft)
+  make sanitize PROJECT=<name>  Compile & run tests with AddressSanitizer & UBSan
+  make valgrind PROJECT=<name>  Run Valgrind full leak check (zero-tolerance exit code)
+  make clean-all                Run clean in all subprojects
+  make fclean-all               Run fclean in all subprojects
+  make norm                     Run Norminette across all projects
 ```
 
 ### ⚡ Quick Usage Examples
