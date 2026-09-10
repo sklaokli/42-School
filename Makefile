@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/05 15:11:14 by sklaokli          #+#    #+#              #
-#    Updated: 2026/09/11 03:41:27 by sklaokli         ###   ########.fr        #
+#    Updated: 2026/09/11 03:43:31 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,19 +138,7 @@ push-printf:
 	@$(MAKE) subpush DIR=r01/ft_printf REMOTE=$(REMOTE) BRANCH=$(BRANCH)
 
 push-gnl:
-	@$(MAKE) subpush DIR=r01/get_next_line REMOTE=$(REMOTE) BRANCH=$(BRANCH)
-
-push-minitalk:
-	@$(MAKE) subpush DIR=r02/minitalk REMOTE=$(REMOTE) BRANCH=$(BRANCH)
-
-push-pushswap:
-	@$(MAKE) subpush DIR=r02/push_swap REMOTE=$(REMOTE) BRANCH=$(BRANCH)
-
-push-solong:
-	@$(MAKE) subpush DIR=r02/so_long REMOTE=$(REMOTE) BRANCH=$(BRANCH)
-
-push-minishell:
-	@$(MAKE) subpush DIR=r03/minishell REMOTE=$(REMOTE) BRANCH=$(BRANCH)
+	@$(MAKE) subpush DIR=r01/get_next_line REMOTE=$(REM
 
 push-philo:
 	@$(MAKE) subpush DIR=r03/philosophers REMOTE=$(REMOTE) BRANCH=$(BRANCH)
