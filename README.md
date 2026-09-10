@@ -260,6 +260,16 @@ Every project in this repository satisfies the stringent requirements of 42 Scho
 
 ---
 
+## 📚 Documentation & Guides
+
+Comprehensive guides are maintained in [`docs/`](docs/):
+
+- **[Style & Consistency Guide](docs/styleGuide.md)**: Monorepo hierarchy, Norminette rules, and C++ Canonical Form.
+- **[Testing & CI Guide](docs/testingGuide.md)**: Test harnesses, Makefile targets, and GitHub Actions CI.
+- **[Git & PR Workflow Guide](docs/workflowGuide.md)**: Branching strategy, Conventional Commits, and automated PR metadata.
+
+---
+
 ## 👤 Author
 
 - **Sorawit Klaokliang** (`sklaokli`)
