@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 20:29:45 by sklaokli          #+#    #+#             */
-/*   Updated: 2026/09/06 00:35:12 by sklaokli         ###   ########.fr       */
+/*   Updated: 2026/09/10 21:35:05 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ bool	push_swap(int *tab, size_t size)
 	t_ps	ps;
 
 	if (!tab || size < 2)
-		return (false);
+		return (true);
 	ps_init(&ps);
 	if (!parse_numbers(&ps.a, tab, size))
 		return (ps_clear(&ps), false);
@@ -112,7 +112,9 @@ bool	push_swap(int *tab, size_t size)
 		sort_two(&ps);
 	else if (size == 3)
 		sort_three(&ps);
-	else if (size > 3)
+	else if (size <= 5)
+		sort_five(&ps, size);
+	else
 		sort_radix(&ps);
 	ps_clear(&ps);
 	return (true);

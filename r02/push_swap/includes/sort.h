@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 23:39:55 by sklaokli          #+#    #+#             */
-/*   Updated: 2026/01/22 15:50:46 by sklaokli         ###   ########.fr       */
+/*   Updated: 2026/09/10 21:35:05 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ void				sort_two(t_ps *ps);
  * @param ps Pointer to the main program state.
  */
 void				sort_three(t_ps *ps);
+
+/**
+ * @brief Sorting strategy for 4 or 5 numbers.
+ *
+ * Pushes minimum elements to stack B until 3 remain,
+ * sorts the 3 elements, and pushes them back.
+ *
+ * @param ps   Pointer to the main program state.
+ * @param size Current size of stack A.
+ */
+void				sort_five(t_ps *ps, size_t size);
 
 /**
  * @brief Main sorting strategy for large sets (Size > 3).

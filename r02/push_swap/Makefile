@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/22 14:05:00 by sklaokli          #+#    #+#              #
-#    Updated: 2026/09/06 00:35:12 by sklaokli         ###   ########.fr        #
+#    Updated: 2026/09/10 21:35:05 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,11 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -rf tests/__pycache__
 
 re: fclean all
 
-.PHONY: all clean fclean re
+test: all
+	@python3 tests/test_push_swap.py
+
+.PHONY: all clean fclean re test
