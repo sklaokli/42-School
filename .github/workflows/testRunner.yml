@@ -15,10 +15,19 @@ on:
         options:
           - all
           - libft
+          - ft_printf
+          - get_next_line
+          - minitalk
           - push_swap
-          - minishell
           - so_long
+          - philosophers
+          - minishell
+          - miniRT
           - webserv
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   run-tests:
@@ -30,6 +39,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
 
       - name: Install Build Tools & Valgrind
         run: |
@@ -49,7 +63,7 @@ jobs:
           fi
 
           echo "Using diff target: $DIFF_TARGET"
-          CHANGED_FILES=$(git diff --name-only $DIFF_TARGET || true)
+          CHANGED_FILES=$(git diff --diff-filter=d --name-only $DIFF_TARGET || true)
           echo "Changed files:"
           echo "$CHANGED_FILES"
 
