@@ -1,4 +1,4 @@
-name: Project Test Runner
+name: Project Tester
 
 on:
   push:
