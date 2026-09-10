@@ -1,4 +1,4 @@
-name: 42 Norminette CI
+name: Norminette
 
 on:
   push:
@@ -8,6 +8,9 @@ on:
       - "**.h"
       - "!**/tests/**"
       - "!**/test/**"
+      - "!**/libraries/**"
+      - "!**/lib/mlx42/**"
+      - "!**/lib/MLX42/**"
   pull_request:
     branches: [main]
     paths:
@@ -15,6 +18,9 @@ on:
       - "**.h"
       - "!**/tests/**"
       - "!**/test/**"
+      - "!**/libraries/**"
+      - "!**/lib/mlx42/**"
+      - "!**/lib/MLX42/**"
   workflow_dispatch:
     inputs:
       target_dir:
@@ -22,9 +28,13 @@ on:
         required: false
         default: ""
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   norminette:
-    name: Check Norm Compliance
+    name: Run Norminette
     runs-on: ubuntu-latest
 
     steps:
@@ -43,10 +53,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install norminette
 
-      - name: Verify Norminette Version
+      - name: Check Norminette Version
         run: norminette -v
 
-      - name: Run Norminette on Changed Files
+      - name: Check Changed Files
         if: "${{ github.event.inputs.target_dir == '' }}"
         run: |
           echo "Detecting modified C and header files (excluding test suites)..."
@@ -59,7 +69,7 @@ jobs:
           fi
 
           echo "Using diff target: $DIFF_TARGET"
-          FILES=$(git diff --diff-filter=d --name-only $DIFF_TARGET | grep -E '\.(c|h)$' | grep -v -E '(^|/)tests?/' || true)
+          FILES=$(git diff --diff-filter=d --name-only $DIFF_TARGET | grep -E '\.(c|h)$' | grep -v -E '(^|/)(tests?|libraries|lib/mlx42|lib/MLX42)/' || true)
 
           EXISTING_FILES=""
           for f in $FILES; do
@@ -69,7 +79,7 @@ jobs:
           done
 
           if [ -z "$EXISTING_FILES" ]; then
-            echo "No project C/header files modified (or only test files changed). Skipping."
+            echo "No project C/header files modified (or only test/vendor files changed). Skipping."
             exit 0
           fi
 
@@ -77,11 +87,11 @@ jobs:
           echo "$EXISTING_FILES"
           norminette $EXISTING_FILES
 
-      - name: Run Norminette on Specific Directory
+      - name: Check Target Directory
         if: "${{ github.event.inputs.target_dir != '' }}"
         run: |
-          echo "Running norminette on: ${{ github.event.inputs.target_dir }} (excluding tests/)"
-          FILES=$(find "${{ github.event.inputs.target_dir }}" -type f \( -name "*.c" -o -name "*.h" \) | grep -v -E '(^|/)tests?/' || true)
+          echo "Running norminette on: ${{ github.event.inputs.target_dir }} (excluding tests/ and vendor libraries)"
+          FILES=$(find "${{ github.event.inputs.target_dir }}" -type f \( -name "*.c" -o -name "*.h" \) | grep -v -E '(^|/)(tests?|libraries|lib/mlx42|lib/MLX42)/' || true)
           if [ -z "$FILES" ]; then
             echo "No source files found in directory."
             exit 0

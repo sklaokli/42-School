@@ -11,8 +11,8 @@
 
 <br/>
 
-[![42 Norminette CI](https://github.com/bababxxm/42-School/actions/workflows/norminette.yml/badge.svg)](https://github.com/bababxxm/42-School/actions/workflows/norminette.yml)
-[![Project Test Runner](https://github.com/bababxxm/42-School/actions/workflows/testRunner.yml/badge.svg)](https://github.com/bababxxm/42-School/actions/workflows/testRunner.yml)
+[![Norminette](https://github.com/sklaokli/42-School/actions/workflows/norminette.yml/badge.svg)](https://github.com/sklaokli/42-School/actions/workflows/norminette.yml)
+[![Project Tester](https://github.com/sklaokli/42-School/actions/workflows/project-tester.yml/badge.svg)](https://github.com/sklaokli/42-School/actions/workflows/project-tester.yml)
 ![Memory Safety](https://img.shields.io/badge/Memory%20Safety-Valgrind%20%7C%20ASan-brightgreen?style=flat-square&logo=c)
 ![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square&logo=git)
 ![Status](https://img.shields.io/badge/Common%20Core-In%20Progress-blue?style=flat-square)

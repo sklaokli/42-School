@@ -1,4 +1,4 @@
-name: Project Test Runner
+name: Project Tester
 
 on:
   push:
@@ -15,14 +15,23 @@ on:
         options:
           - all
           - libft
+          - ft_printf
+          - get_next_line
+          - minitalk
           - push_swap
-          - minishell
           - so_long
+          - philosophers
+          - minishell
+          - miniRT
           - webserv
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   run-tests:
-    name: Run Automated Tests
+    name: Test Projects
     runs-on: ubuntu-latest
 
     steps:
@@ -31,12 +40,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
       - name: Install Build Tools & Valgrind
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq build-essential valgrind
 
-      - name: Selective Pipeline Testing (on Push / PR)
+      - name: Test Changed Projects
         if: "${{ github.event_name != 'workflow_dispatch' }}"
         run: |
           echo "Detecting modified projects for selective testing..."
@@ -49,7 +63,7 @@ jobs:
           fi
 
           echo "Using diff target: $DIFF_TARGET"
-          CHANGED_FILES=$(git diff --name-only $DIFF_TARGET || true)
+          CHANGED_FILES=$(git diff --diff-filter=d --name-only $DIFF_TARGET || true)
           echo "Changed files:"
           echo "$CHANGED_FILES"
 
@@ -73,7 +87,7 @@ jobs:
             echo "No test-enabled projects modified in this PR / commit. Skipping."
           fi
 
-      - name: Manual Project Testing (Workflow Dispatch)
+      - name: Test Selected Project
         if: "${{ github.event_name == 'workflow_dispatch' }}"
         run: |
           TARGET="${{ github.event.inputs.project }}"
